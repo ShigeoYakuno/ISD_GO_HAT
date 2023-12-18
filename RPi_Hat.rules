@@ -1,0 +1,118 @@
+
+(rules PCB RPi_Hat
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (eu.mihosoft.freerouting.autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 30)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.2)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.9)
+    )
+  )
+  (rule
+    (width 300.0)
+    (clear 200.2)
+    (clear 150.0 (type smd_to_turn_gap))
+    (clear 400.2 (type default_power))
+    (clear 50.0 (type smd_smd))
+    (clear 400.2 (type smd_power))
+    (clear 400.2 (type "kicad_default"_power))
+    (clear 400.2 (type gnd_power))
+    (clear 400.2 (type power_power))
+  )
+  (padstack "Via[0-1]_600:400_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:400_um" "Via[0-1]_600:400_um" default
+  )
+  (via 
+    "Via[0-1]_600:400_um-kicad_default" "Via[0-1]_600:400_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_600:400_um-gnd" "Via[0-1]_600:400_um" gnd
+  )
+  (via 
+    "Via[0-1]_600:400_um-power" "Via[0-1]_600:400_um" power
+  )
+  (via_rule
+    default "Via[0-1]_600:400_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:400_um-kicad_default"
+  )
+  (via_rule
+    gnd "Via[0-1]_600:400_um-gnd"
+  )
+  (via_rule
+    power "Via[0-1]_600:400_um-power"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 300.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    "Net-(J2-Pad3)" "Net-(J2-Pad5)" "Net-(J2-Pad7)" "Net-(J2-Pad8)" "Net-(J2-Pad10)" "Net-(J2-Pad11)" "Net-(J2-Pad12)" "Net-(J2-Pad13)"
+    "Net-(J2-Pad15)" "Net-(J2-Pad19)" "Net-(J2-Pad21)" "Net-(J2-Pad22)" "Net-(J2-Pad23)" "Net-(J2-Pad24)" "Net-(J2-Pad26)" "Net-(J2-Pad27)"
+    "Net-(J2-Pad28)" "Net-(J2-Pad29)" "Net-(J2-Pad31)" "Net-(J2-Pad32)" "Net-(J2-Pad33)" "Net-(J2-Pad35)" "Net-(J2-Pad36)" "Net-(J2-Pad37)"
+    "Net-(J2-Pad38)" "Net-(J2-Pad40)" "Net-(C3-Pad1)" "Net-(C4-Pad1)" "Net-(D1-Pad2)" "Net-(D2-Pad2)" "Net-(D3-Pad2)"
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 300.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class gnd
+    GND
+    (clearance_class gnd)
+    (via_rule gnd)
+    (rule
+      (width 500.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class power
+    +5V +3V3
+    (clearance_class power)
+    (via_rule power)
+    (rule
+      (width 800.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)
